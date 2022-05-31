@@ -127,4 +127,9 @@
 
     const uint8_t LED_SIDE_RIGHT[] = { LED_R1, LED_R2, LED_R3, LED_R4, LED_R5, LED_R6, LED_R7, LED_R8};
 
+    const uint32_t LED_ALPHA[] = {
+        LED_Q, LED_W, LED_E, LED_R, LED_T, LED_Y, LED_U, LED_I, LED_O, LED_P,
+        LED_A, LED_S, LED_D, LED_F, LED_G, LED_H, LED_J, LED_K, LED_L,
+        LED_Z, LED_X, LED_C, LED_V, LED_B, LED_N, LED_M};
+
 #endif

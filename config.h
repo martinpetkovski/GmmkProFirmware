@@ -1,6 +1,9 @@
 #pragma once
 
 #ifdef RGB_MATRIX_ENABLE
-    #define RGB_DISABLE_TIMEOUT 1200000     // 20 minutes (20 * 60 * 1000ms)
+    #define RGB_DISABLE_TIMEOUT 600000     // 20 minutes (20 * 60 * 1000ms)
     #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #endif
+
+#define LCPC_KEYS KC_LCTL, KC_LSFT, KC_RBRACKET
+#define RCPC_KEYS KC_RCTL, KC_RSFT, KC_LBRACKET
