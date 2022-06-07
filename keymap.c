@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define I_RST C(S(KC_T))
 #define I_DOWN C(KC_J)
 
-enum custom_keycodes { SK_LAYER = SAFE_RANGE, SK_RESET, LNK_FB, LNK_TW, LNK_YT, SET_L1, SET_L2, SET_L3, SET_L4, EX_CPYLNK, EX_FINDTXT, EX_CNGLNG };
+enum custom_keycodes { SK_LYR_U = SAFE_RANGE, SK_LYR_D, SK_RESET, LNK_FB, LNK_TW, LNK_YT, SET_L1, SET_L2, SET_L3, SET_L4, EX_CPYLNK, EX_FINDTXT, EX_CNGLNG, VS_BACK, VS_FWD, VS_FIND, VS_FILE, VS_FORMAT, VS_COM, VS_UNCOM };
 
 int        active_layer = 0;
 static int num_layers   = 3;
@@ -67,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [QWERTY] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,   KC_PSCR,          KC_MUTE,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,   KC_BSPC,          KC_DEL,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,  KC_BSLS,          C(KC_U),
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,           KC_ENT,           C(KC_Z),
-        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,           KC_RSFT, KC_UP,   SK_LAYER,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,  KC_BSLS,           _______,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,           KC_ENT,           _______,
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,           KC_RSFT, KC_UP,   _______,
         KC_LCTL, KC_LGUI, KC_LALT,                  KC_SPC,                             KC_RALT, KC_RCTL, SK_RESET, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -79,16 +79,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______   , _______    , _______ , _______,          RESET,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______   , _______    ,          _______,          EX_FINDTXT,
         _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______   , _______    ,          _______, _______, EX_CPYLNK,    
-        _______, _______, LALT_T(EX_CNGLNG),             _______,                            A(KC_LEFT), A(KC_RIGHT), SK_RESET, _______, _______, _______
+        _______, _______, _______,                           _______,                            A(KC_LEFT), A(KC_RIGHT), SK_RESET, _______, _______, _______
     ),
 
     [VISUAL_STUDIO] = LAYOUT(
-        _______, C(KC_S), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            C(KC_V),
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            RESET,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,            _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_RSPC,                    _______, SK_LAYER,
-        _______, _______, _______,                            _______,                            _______, _______, SK_RESET, _______, _______, _______
+        _______, C(KC_S), LALT(KC_O), VS_FIND, VS_FILE, _______, C(S(KC_B)), S(KC_F5), C(S(KC_F5)) , _______, _______, _______,         _______,   _______,          C(KC_V),
+        _______, _______, _______,    _______, _______, _______, _______,    _______ , _______  ,    _______, _______, _______,         _______,   _______,          _______,
+        _______, _______, _______,    _______, _______, _______, _______,    _______ , _______  ,    _______, _______, _______,         _______,   _______,          VS_UNCOM,
+        _______, _______, _______,    _______, _______, _______, _______,    _______ , _______  ,    _______, _______, _______,                _______,              VS_COM,
+        _______, _______, _______,    _______, _______, _______, _______,    _______ , _______  ,    _______, _______, LCTL(KC_TAB),                    _______,     VS_FORMAT,
+        _______, _______, _______,                               _______,                               VS_BACK, VS_FWD      , SK_RESET, _______, _______, _______
     ),
 
     [SPECIAL] = LAYOUT(
@@ -96,17 +96,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          RESET,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
-        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, SK_LAYER,
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, SK_RESET, _______, _______, _______
     ),
 
     [FUNCTIONAL] = LAYOUT(
-        _______, SET_L1 , SET_L2 , SET_L3 ,  SET_L4,  KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,          _______,
+        _______, SET_L1 , SET_L2 , SET_L3 ,  SET_L4, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            RESET, 
-        _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
-        _______,          _______, RGB_HUI, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, SK_LAYER,
-        _______, _______, _______,                            _______,                            _______, _______, SK_RESET, RGB_SPD, RGB_RMOD, RGB_SPI
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            RESET, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+        _______, _______, _______,                            _______,                            SK_LYR_D, SK_LYR_U, SK_RESET, _______, _______, _______
     ),
 
 };
@@ -118,10 +118,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     bool shouldMoveLayer = false;
     bool consumeInput    = false;
     switch (keycode) {
-        case SK_LAYER:
+        case SK_LYR_U:
             if (record->event.pressed) {
-                active_layer++;
-                shouldMoveLayer = true;
+                last_active_layer++;
+                if (last_active_layer > num_layers) last_active_layer = 0;
+            }
+            break;
+        case SK_LYR_D:
+            if (record->event.pressed) {
+                last_active_layer--;
+                if (last_active_layer < 0) last_active_layer = num_layers;
             }
             break;
         case SK_RESET:
@@ -172,13 +178,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case EX_FINDTXT:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL("c") SS_DELAY(16) SS_LGUI("r") SS_DELAY(32) "\"www.google.com/search?q=" SS_DELAY(16) SS_LCTL("v") "\"" SS_DELAY(16) SS_TAP(X_ENT)); 
+                SEND_STRING(SS_LCTL("c") SS_DELAY(16) SS_LGUI("r") SS_DELAY(32) "\"www.google.com/search?q=" SS_DELAY(16) SS_LCTL("v") "\"" SS_DELAY(16) SS_TAP(X_ENT));
             }
             break;
         case LALT_T(EX_CNGLNG):
-            if (record->tap.count && record->event.pressed) {
+            if (record->tap.count == 2 && record->event.pressed) {
                 SEND_STRING(SS_DOWN(X_LALT) SS_DELAY(16) SS_TAP(X_LSFT) SS_DELAY(16) SS_UP(X_LALT));
                 consumeInput = true;
+            }
+            break;
+        case VS_BACK:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_LSFT) SS_DELAY(16) SS_DOWN(X_BSPC) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_LSFT) SS_DELAY(16) SS_UP(X_BSPC));
+            }
+            break;
+        case VS_FWD:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_LSFT) SS_DELAY(16) SS_DOWN(X_LALT) SS_DELAY(16) SS_DOWN(X_BSPC) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_LSFT) SS_DELAY(16) SS_UP(X_LALT) SS_DELAY(16) SS_UP(X_BSPC));
+            }
+            break;
+        case VS_FIND:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_LSFT) SS_DELAY(16) SS_DOWN(X_F) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_LSFT) SS_DELAY(16) SS_UP(X_F) SS_DELAY(60) SS_TAP(X_ENT));
+            }
+            break;
+        case VS_FILE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_1) SS_DELAY(16) SS_DOWN(X_F) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_1) SS_DELAY(16) SS_UP(X_F));
+            }
+            break;
+        case VS_FORMAT:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_K) SS_DELAY(16) SS_DOWN(X_D) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_K) SS_DELAY(16) SS_UP(X_D));
+            }
+            break;
+        case VS_COM:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_K) SS_DELAY(16) SS_DOWN(X_C) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_K) SS_DELAY(16) SS_UP(X_C));
+            }
+            break;
+        case VS_UNCOM:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(16) SS_DOWN(X_K) SS_DELAY(16) SS_DOWN(X_U) SS_DELAY(16) SS_UP(X_LCTL) SS_DELAY(16) SS_UP(X_K) SS_DELAY(16) SS_UP(X_U));
             }
             break;
     }
@@ -253,6 +294,8 @@ void rgb_matrix_indicators_kb() {
             break;
         case FUNCTIONAL:
             rgb_matrix_set_color(LED_RCTL, 255, 0, 0);
+            rgb_matrix_set_color(LED_RALT, 255, 0, 0);
+            rgb_matrix_set_color(LED_FN, 255, 0, 0);
             rgb_matrix_set_color(LED_F1, last_active_layer != 0 ? 255 : 0, last_active_layer == 0 ? 255 : 0, 0);
             rgb_matrix_set_color(LED_F2, last_active_layer != 1 ? 255 : 0, last_active_layer == 1 ? 255 : 0, 0);
             rgb_matrix_set_color(LED_F3, last_active_layer != 2 ? 255 : 0, last_active_layer == 2 ? 255 : 0, 0);
@@ -284,6 +327,24 @@ void rgb_matrix_indicators_kb() {
             break;
         case VISUAL_STUDIO:
             set_sidelights_color(0, 0, 255);
+            rgb_matrix_set_color(LED_F1, 0, 255, 0);
+            rgb_matrix_set_color(LED_F2, 255, 255, 0);
+            rgb_matrix_set_color(LED_F3, 0, 0, 255);
+            rgb_matrix_set_color(LED_F4, 0, 255, 255);
+            rgb_matrix_set_color(LED_F5, 0, 255, 0);
+            rgb_matrix_set_color(LED_F6, 255, 255, 0);
+            rgb_matrix_set_color(LED_F7, 255, 0, 0);
+            rgb_matrix_set_color(LED_F8, 255, 255, 0);
+            rgb_matrix_set_color(LED_F9, 255, 0, 0);
+            rgb_matrix_set_color(LED_F10, 255, 100, 100);
+            rgb_matrix_set_color(LED_F11, 100, 255, 100);
+            rgb_matrix_set_color(LED_F12, 255, 255, 0);
+            rgb_matrix_set_color(LED_RCTL, 0, 255, 255);
+            rgb_matrix_set_color(LED_RALT, 0, 255, 255);
+            rgb_matrix_set_color(LED_FN, 0, 255, 255);
+            rgb_matrix_set_color(LED_PGUP, 100, 255, 200);
+            rgb_matrix_set_color(LED_PGDN, 0, 255, 0);
+            rgb_matrix_set_color(LED_END, 100, 100, 255);
             break;
         case SPECIAL:
             set_sidelights_color(0, 255, 255);
