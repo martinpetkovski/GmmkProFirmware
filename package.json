@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "electron-active-window": "^0.0.6",
+    "node-hid": "^2.1.1",
+  }
+}
