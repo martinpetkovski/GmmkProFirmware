@@ -116,6 +116,8 @@
 
     const uint8_t LED_LIST_NUMROW[] = { LED_GRV, LED_1, LED_2, LED_3, LED_4, LED_5, LED_6, LED_7, LED_8, LED_9, LED_0, LED_MINS, LED_EQL, LED_BSPC, LED_DEL};
 
+    const uint8_t LED_LIST_MACROCOL[] = {LED_DEL, LED_PGUP, LED_PGDN, LED_END};
+
     const uint8_t LED_LIST_NUMPAD[] = {
         LED_7, LED_8, LED_9,
         LED_U, LED_I, LED_O,
