@@ -371,7 +371,19 @@ void light_up_everything(void) {
             }
         }
 
-        if (should_light_up) send_led_signal_custom(i, 512, FADE_OUT, 255, 255, 255);
+        for (uint8_t j = 0; j < 8; j++) {
+            if (LED_SIDE_LEFT[j] == i || LED_SIDE_RIGHT[j] == i) {
+                should_light_up = false;
+                break;
+            }
+        }
+
+        if (i == LED_RCTL || i == LED_RALT || i == LED_FN) {
+            should_light_up = false;
+        }
+
+
+        if (should_light_up) send_led_signal_custom(i, 128, FADE_OUT, 255, 0, 0);
     }
 }
 
@@ -643,6 +655,8 @@ void keyboard_post_init_user(void) {
     add_backlight_color(7, 0, 0, 0xFF);
     add_backlight_color(8, 229, 99, 37);
     add_backlight_color(9, 165, 140, 109);
+
+    custom_feature_flags = CFF_AUTOSHIFT;
 }
 
 int32_t remap_value(int32_t low1, int32_t high1, int32_t low2, int32_t high2, int32_t value) {
@@ -658,6 +672,8 @@ float clamp(float n, float lower, float upper) {
 }
 
 float circular_ease_out(float p) {
+    p = p * p;
+    clamp(p, 0.0f, 1.0f);
     return -(p * (p - 2));
 }
 
@@ -692,6 +708,7 @@ void rgb_matrix_indicators_kb() {
     }
 
     rgb_matrix_set_color(LED_DEL, 0xFF, 0, 0);
+    rgb_matrix_set_color(LED_ESC, 0xFF, 0, 0);
 
     switch (active_layer) {
         case MP_QWERTY:
@@ -835,7 +852,7 @@ void rgb_matrix_indicators_kb() {
     if (letter_index < strlen(str_timer.text)) {
         char     letter  = str_timer.text[letter_index];
         uint16_t ledcode = get_led_code_ascii(letter);
-        send_led_signal_custom(ledcode, single_key_string_timer_time, FADE_IN, 255, 0, 0);
+        send_led_signal_custom(ledcode, single_key_string_timer_time, FADE_OUT, 255, 0, 0);
     }
 
     frame_number++;
